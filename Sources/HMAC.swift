@@ -38,4 +38,16 @@ final public class HMAC<Variant: HashProtocol> {
         
         return finalHash
     }
+
+    public static func authenticate(message: String, withKey key: String) -> String {
+        return String(authenticate(message: message.UInt8View, withKey: message.UInt8View))
+    }
+}
+
+private extension String {
+    var UInt8View: [UInt8] {
+        return self.utf8.map { (codeUnit) -> UInt8 in
+            return codeUnit
+        }
+    }
 }
